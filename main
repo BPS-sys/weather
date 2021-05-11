@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-
+import tkinter
 url='https://tenki.jp/forecast/6/33/6510/30201/'
 html=requests.get(url)
 soup=BeautifulSoup(html.text,'html.parser')
@@ -10,17 +10,20 @@ today=today_list[1].replace('今日','')
 today_weather='今日の天気は'+today_list[5]
 today_max_temp='最高気温は'+today_list[8]
 today_min_temp='最低気温は'+today_list[11]
-today_rainy_persent_em='０時から６時までの降水確率は'+today_list[27]+'です'
-today_rainy_persent_m='６時から１２時までの降水確率は'+today_list[28]+'です'
-today_rainy_persent_e='１２時から１８時までの降水確率は'+today_list[29]+'です'
-today_rainy_persent_n='１８時から２４時までの降水確率は'+today_list[30]+'です'
-today_wind='風は'+today_list[34]+'です'
-print(today)
-print(today_weather)
-print(today_max_temp)
-print(today_min_temp)
-print(today_rainy_persent_em)
-print(today_rainy_persent_m)
-print(today_rainy_persent_e)
-print(today_rainy_persent_n)
-print(today_wind)
+today_rainy_persent_em='00時から06時までの降水確率は'+today_list[27]+'です'
+today_rainy_persent_m='06時から12時までの降水確率は'+today_list[28]+'です'
+today_rainy_persent_e='12時から18時までの降水確率は'+today_list[29]+'です'
+today_rainy_persent_n='18時から24時までの降水確率は'+today_list[30]+'です'
+today_wind=today_list[34]
+root=tkinter.Tk()
+root.title('今日の天気')
+root.iconphoto(False,tkinter.PhotoImage(file=r'C:\Users\yuuki\Desktop\python\websc\weather.png'))
+root.minsize(600,450)
+root.maxsize(600,450)
+canvas=tkinter.Canvas(width=600,height=450,bg='black',highlightthickness=0)
+canvas.pack()
+label=tkinter.Label(text='asdf',fg='white',bg='black',font=['メイリオ',23],justify='center')
+label.place(x=10,y=10)
+text=today+'\n'+today_weather+'\n'+today_max_temp+'\n'+today_min_temp+'\n'+today_rainy_persent_em+'\n'+today_rainy_persent_m+'\n'+today_rainy_persent_e+'\n'+today_rainy_persent_n+'\n'+today_wind
+label['text']=text
+root.mainloop()
