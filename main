@@ -1,0 +1,26 @@
+from bs4 import BeautifulSoup
+import requests
+
+url='https://tenki.jp/forecast/6/33/6510/30201/'
+html=requests.get(url)
+soup=BeautifulSoup(html.text,'html.parser')
+today_info=soup.find(class_='today-weather')
+today_list=today_info.text.split('\n')
+today=today_list[1].replace('今日','')
+today_weather='今日の天気は'+today_list[5]
+today_max_temp='最高気温は'+today_list[8]
+today_min_temp='最低気温は'+today_list[11]
+today_rainy_persent_em='０時から６時までの降水確率は'+today_list[27]+'です'
+today_rainy_persent_m='６時から１２時までの降水確率は'+today_list[28]+'です'
+today_rainy_persent_e='１２時から１８時までの降水確率は'+today_list[29]+'です'
+today_rainy_persent_n='１８時から２４時までの降水確率は'+today_list[30]+'です'
+today_wind='風は'+today_list[34]+'です'
+print(today)
+print(today_weather)
+print(today_max_temp)
+print(today_min_temp)
+print(today_rainy_persent_em)
+print(today_rainy_persent_m)
+print(today_rainy_persent_e)
+print(today_rainy_persent_n)
+print(today_wind)
